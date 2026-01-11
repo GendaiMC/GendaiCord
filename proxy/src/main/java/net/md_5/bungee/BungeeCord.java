@@ -6,6 +6,7 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import com.google.common.util.concurrent.ThreadFactoryBuilder;
+import com.mcgendai.bungee.command.CommandPlugin;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelException;
@@ -204,7 +205,7 @@ public class BungeeCord extends ProxyServer
                 .completer( new ConsoleCommandCompleter( this ) )
                 .build();
 
-        logger = new BungeeLogger( "BungeeCord", "proxy.log", consoleReader );
+        logger = new BungeeLogger( "GendaiCord", "proxy.log", consoleReader );
         JDK14LoggerFactory.LOGGER = logger;
 
         // Before we can set the Err and Out streams to our LoggingOutputStream we also have to remove
@@ -230,6 +231,7 @@ public class BungeeCord extends ProxyServer
         getPluginManager().registerCommand( null, new CommandIP() );
         getPluginManager().registerCommand( null, new CommandBungee() );
         getPluginManager().registerCommand( null, new CommandPerms() );
+        getPluginManager().registerCommand( null, new CommandPlugin() );
 
         if ( !Boolean.getBoolean( "net.md_5.bungee.native.disable" ) )
         {
@@ -538,13 +540,13 @@ public class BungeeCord extends ProxyServer
     @Override
     public String getName()
     {
-        return "BungeeCord";
+        return "GendaiCord";
     }
 
     @Override
     public String getVersion()
     {
-        return ( BungeeCord.class.getPackage().getImplementationVersion() == null ) ? "unknown" : BungeeCord.class.getPackage().getImplementationVersion();
+        return "2025-12";
     }
 
     public final void reloadMessages()
@@ -688,7 +690,7 @@ public class BungeeCord extends ProxyServer
     @Override
     public String getGameVersion()
     {
-        return ProtocolConstants.SUPPORTED_VERSIONS.get( 0 ) + "-" + ProtocolConstants.SUPPORTED_VERSIONS.get( ProtocolConstants.SUPPORTED_VERSIONS.size() - 1 );
+        return "[GendaiMC]1.21.8+";
     }
 
     @Override
